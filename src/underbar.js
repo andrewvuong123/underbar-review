@@ -101,6 +101,17 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    iterator = iterator || _.identity;
+    let results = [];
+    let uniqObj = {};
+    _.each(array, function(item) {
+      uniqObj[iterator(item)] = uniqObj[iterator(item)] || item;
+    });
+    _.each(uniqObj, function(value) {
+      results.push(value);
+    });
+    return results;
+
   };
 
 
