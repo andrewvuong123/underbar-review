@@ -208,6 +208,14 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    iterator = iterator || _.identity;
+    let isTrue = false;
+    return _.reduce(collection, function(memo, item) {
+      if (iterator(item)) {
+        isTrue = true;
+      }
+      return isTrue;
+    }, false);
   };
 
 
