@@ -302,6 +302,16 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    let memory = {};
+    return function() {
+      let arg = [...arguments];
+      arg = arg.join('');
+      if (arg in memory) {
+        return memory[arg];
+      } else {
+        return memory[arg] = func.apply(this, arguments);
+      }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
